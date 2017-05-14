@@ -10,7 +10,10 @@ import {
 } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
+import WarningIcon from 'material-ui/svg-icons/alert/warning';
+import {FlatButton}from 'material-ui';
 
+import {red500} from 'material-ui/styles/colors';
 const styles = {
   propContainer: {
     width: 200,
@@ -96,14 +99,15 @@ export default class TableData extends Component {
             enableSelectAll={this.state.enableSelectAll}
           >
             <TableRow>
-              <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
-                Super Header
-              </TableHeaderColumn>
+
             </TableRow>
             <TableRow>
-              <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Status">Status</TableHeaderColumn>
+              <TableHeaderColumn >ID</TableHeaderColumn>
+              <TableHeaderColumn >TimeStamp</TableHeaderColumn>
+              <TableHeaderColumn >Status</TableHeaderColumn>
+              <TableHeaderColumn >Severity</TableHeaderColumn>
+              <TableHeaderColumn >Picture</TableHeaderColumn>
+
             </TableRow>
           </TableHeader>
           <TableBody
@@ -117,6 +121,9 @@ export default class TableData extends Component {
                 <TableRowColumn>{index}</TableRowColumn>
                 <TableRowColumn>{row.name}</TableRowColumn>
                 <TableRowColumn>{row.status}</TableRowColumn>
+                <TableRowColumn><WarningIcon color={red500} /></TableRowColumn>
+                <TableRowColumn><FlatButton>show image</FlatButton></TableRowColumn>
+
               </TableRow>
             ))}
           </TableBody>
@@ -136,71 +143,74 @@ export default class TableData extends Component {
           </TableFooter>
         </Table>
 
-        <div style={styles.propContainer}>
-          <h3>Table Properties</h3>
-          <TextField
-            floatingLabelText="Table Body Height"
-            defaultValue={this.state.height}
-            onChange={this.handleChange}
-          />
-          <Toggle
-            name="fixedHeader"
-            label="Fixed Header"
-            onToggle={this.handleToggle}
-            defaultToggled={this.state.fixedHeader}
-          />
-          <Toggle
-            name="fixedFooter"
-            label="Fixed Footer"
-            onToggle={this.handleToggle}
-            defaultToggled={this.state.fixedFooter}
-          />
-          <Toggle
-            name="selectable"
-            label="Selectable"
-            onToggle={this.handleToggle}
-            defaultToggled={this.state.selectable}
-          />
-          <Toggle
-            name="multiSelectable"
-            label="Multi-Selectable"
-            onToggle={this.handleToggle}
-            defaultToggled={this.state.multiSelectable}
-          />
-          <Toggle
-            name="enableSelectAll"
-            label="Enable Select All"
-            onToggle={this.handleToggle}
-            defaultToggled={this.state.enableSelectAll}
-          />
-          <h3 style={styles.propToggleHeader}>TableBody Properties</h3>
-          <Toggle
-            name="deselectOnClickaway"
-            label="Deselect On Clickaway"
-            onToggle={this.handleToggle}
-            defaultToggled={this.state.deselectOnClickaway}
-          />
-          <Toggle
-            name="stripedRows"
-            label="Stripe Rows"
-            onToggle={this.handleToggle}
-            defaultToggled={this.state.stripedRows}
-          />
-          <Toggle
-            name="showRowHover"
-            label="Show Row Hover"
-            onToggle={this.handleToggle}
-            defaultToggled={this.state.showRowHover}
-          />
-          <h3 style={styles.propToggleHeader}>Multiple Properties</h3>
-          <Toggle
-            name="showCheckboxes"
-            label="Show Checkboxes"
-            onToggle={this.handleToggle}
-            defaultToggled={this.state.showCheckboxes}
-          />
-        </div>
+
       </div>
     );
   }
 }
+
+
+{/*<div style={styles.propContainer}>*/}
+  {/*<h3>Table Properties</h3>*/}
+  {/*<TextField*/}
+    {/*floatingLabelText="Table Body Height"*/}
+    {/*defaultValue={this.state.height}*/}
+    {/*onChange={this.handleChange}*/}
+  {/*/>*/}
+  {/*<Toggle*/}
+    {/*name="fixedHeader"*/}
+    {/*label="Fixed Header"*/}
+    {/*onToggle={this.handleToggle}*/}
+    {/*defaultToggled={this.state.fixedHeader}*/}
+  {/*/>*/}
+  {/*<Toggle*/}
+    {/*name="fixedFooter"*/}
+    {/*label="Fixed Footer"*/}
+    {/*onToggle={this.handleToggle}*/}
+    {/*defaultToggled={this.state.fixedFooter}*/}
+  {/*/>*/}
+  {/*<Toggle*/}
+    {/*name="selectable"*/}
+    {/*label="Selectable"*/}
+    {/*onToggle={this.handleToggle}*/}
+    {/*defaultToggled={this.state.selectable}*/}
+  {/*/>*/}
+  {/*<Toggle*/}
+    {/*name="multiSelectable"*/}
+    {/*label="Multi-Selectable"*/}
+    {/*onToggle={this.handleToggle}*/}
+    {/*defaultToggled={this.state.multiSelectable}*/}
+  {/*/>*/}
+  {/*<Toggle*/}
+    {/*name="enableSelectAll"*/}
+    {/*label="Enable Select All"*/}
+    {/*onToggle={this.handleToggle}*/}
+    {/*defaultToggled={this.state.enableSelectAll}*/}
+  {/*/>*/}
+  {/*<h3 style={styles.propToggleHeader}>TableBody Properties</h3>*/}
+  {/*<Toggle*/}
+    {/*name="deselectOnClickaway"*/}
+    {/*label="Deselect On Clickaway"*/}
+    {/*onToggle={this.handleToggle}*/}
+    {/*defaultToggled={this.state.deselectOnClickaway}*/}
+  {/*/>*/}
+  {/*<Toggle*/}
+    {/*name="stripedRows"*/}
+    {/*label="Stripe Rows"*/}
+    {/*onToggle={this.handleToggle}*/}
+    {/*defaultToggled={this.state.stripedRows}*/}
+  {/*/>*/}
+  {/*<Toggle*/}
+    {/*name="showRowHover"*/}
+    {/*label="Show Row Hover"*/}
+    {/*onToggle={this.handleToggle}*/}
+    {/*defaultToggled={this.state.showRowHover}*/}
+  {/*/>*/}
+  {/*<h3 style={styles.propToggleHeader}>Multiple Properties</h3>*/}
+  {/*<Toggle*/}
+    {/*name="showCheckboxes"*/}
+    {/*label="Show Checkboxes"*/}
+    {/*onToggle={this.handleToggle}*/}
+    {/*defaultToggled={this.state.showCheckboxes}*/}
+  {/*/>*/}
+{/*</div>*/}

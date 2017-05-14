@@ -105,9 +105,10 @@ class HomePage extends React.Component {
           {/*dangerouslySetInnerHTML={{ __html: html }}*/}
         {/*/>*/}
         <h4></h4>
+        <Forecast latitude={this.state.coords.lat} longitude={this.state.coords.long} units={'si24'} name='Athens' />
+
         <Wind data={this.state.posts} />
         <TableData />
-        <Forecast latitude={this.state.coords.lat} longitude={this.state.coords.long} units={'uk'} name='Athens' />
 
         <p>
           <br /><br />
