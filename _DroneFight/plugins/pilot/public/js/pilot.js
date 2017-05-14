@@ -144,7 +144,7 @@ PILOT_ACCELERATION = 0.04;
          * by the sendCommand method, triggered by a timer.
          *
          */
-        Pilot.keyDown("c")
+
         Pilot.prototype.keyDown = function keyDown(ev) {
                 console.log("Keydown: " + ev.keyCode);
                 if (ev.keyCode == 9) {
