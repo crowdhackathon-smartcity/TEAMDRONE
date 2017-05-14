@@ -12,8 +12,44 @@ import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
 import s from './styles.css';
 import { title, html } from './index.md';
+import axios from 'axios';
+import Wind from './components/wind.js';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import TableData from './components/table-data';
+var ReactDOM = require('react-dom');
+var NotificationSystem = require('react-notification-system');
+
+var MyComponent = React.createClass({
+  _notificationSystem: null,
+
+  _addNotification: function(event) {
+    event.preventDefault();
+    this._notificationSystem.addNotification({
+      message: 'Notification message',
+      level: 'success'
+    });
+  },
+
+  componentDidMount: function() {
+    this._notificationSystem = this.refs.notificationSystem;
+  },
+
+  render: function() {
+    return (
+      <div>
+        <button onClick={this._addNotification}>Add notification</button>
+        <NotificationSystem ref="notificationSystem" />
+      </div>
+    );
+  }
+});
 class HomePage extends React.Component {
+  state = {
+    posts: {
+
+    }
+  }
 
   static propTypes = {
     articles: PropTypes.arrayOf(PropTypes.shape({
@@ -25,31 +61,36 @@ class HomePage extends React.Component {
 
   componentDidMount() {
     document.title = title;
+    axios.get(`https://bookit-80365.firebaseio.com/posts.json`)
+      .then(res => {
+        console.log(res.data)
+        this.setState({ posts:res.data });
+      });
   }
 
   render() {
     return (
+      <MuiThemeProvider>
       <Layout className={s.content}>
-        <div
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-        <h4>Articles</h4>
-        <ul>
-          {this.props.articles.map(article =>
-            <li key={article.url}>
-              <a href={article.url}>{article.title}</a>
-              by {article.author}
-            </li>,
-          )}
-        </ul>
+        <MyComponent />
+        {/*<div*/}
+          {/*// eslint-disable-next-line react/no-danger*/}
+          {/*dangerouslySetInnerHTML={{ __html: html }}*/}
+        {/*/>*/}
+        <h4></h4>
+        <Wind data={this.state.posts} />
+<TableData />
         <p>
           <br /><br />
         </p>
       </Layout>
+      </MuiThemeProvider>
     );
   }
 
 }
+
+
+
 
 export default HomePage;
