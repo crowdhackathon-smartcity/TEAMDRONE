@@ -53,7 +53,9 @@ class HomePage extends React.Component {
     },
     posts: {
 
-    }
+    },
+    img: '',
+    imgString:''
   }
 
   static propTypes = {
@@ -78,6 +80,12 @@ class HomePage extends React.Component {
       .then(res => {
         console.log(res.data)
         this.setState({ posts:res.data });
+      });
+    axios.get(`http://192.168.1.72:3000/image`)
+      .then(res => {
+        console.log(res.data)
+        this.setState({ img:res.data });
+        this.setState({ imgString:'data:image/png;base64,' + this.state.img });
       });
     navigator.geolocation.getCurrentPosition(success, error);
     function success(pos) {
@@ -105,6 +113,7 @@ class HomePage extends React.Component {
           {/*dangerouslySetInnerHTML={{ __html: html }}*/}
         {/*/>*/}
         <h4></h4>
+        <img src={this.state.imgString}  />
         <Forecast latitude={this.state.coords.lat} longitude={this.state.coords.long} units={'si24'} name='Athens' />
 
         <Wind data={this.state.posts} />

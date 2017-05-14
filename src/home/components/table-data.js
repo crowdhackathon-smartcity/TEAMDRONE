@@ -35,31 +35,15 @@ const params = {v: '3.exp', key: 'AIzaSyBOAD8xjBuJWcIiPD-Pf99erAFWG68N5aE'};
 
 const tableData = [
   {
-    name: 'John Smith',
+    name: new Date().toString(),
     status: 'Employed',
   },
   {
-    name: 'Randal White',
+    nname: new Date().toString(),
     status: 'Unemployed',
   },
   {
-    name: 'Stephanie Sanders',
-    status: 'Employed',
-  },
-  {
-    name: 'Steve Brown',
-    status: 'Employed',
-  },
-  {
-    name: 'Joyce Whitten',
-    status: 'Employed',
-  },
-  {
-    name: 'Samuel Roberts',
-    status: 'Employed',
-  },
-  {
-    name: 'Adam Moore',
+    name: new Date().toString(),
     status: 'Employed',
   },
 ];
@@ -159,7 +143,6 @@ export default class TableData extends Component {
             <TableRow>
               <TableHeaderColumn >ID</TableHeaderColumn>
               <TableHeaderColumn >TimeStamp</TableHeaderColumn>
-              <TableHeaderColumn >Status</TableHeaderColumn>
               <TableHeaderColumn tooltip="show in map" >Location</TableHeaderColumn>
               <TableHeaderColumn >Severity</TableHeaderColumn>
               <TableHeaderColumn >Picture</TableHeaderColumn>
@@ -176,7 +159,6 @@ export default class TableData extends Component {
               <TableRow key={index}>
                 <TableRowColumn>{index}</TableRowColumn>
                 <TableRowColumn>{row.name}</TableRowColumn>
-                <TableRowColumn>{row.status}</TableRowColumn>
                 <TableRowColumn><FlatButton onClick={()=> this.showMap(37.861033, 23.753663)}>37.861033, 23.753663</FlatButton></TableRowColumn>
                 <TableRowColumn><WarningIcon color={red500} /></TableRowColumn>
                 <TableRowColumn><FlatButton>show image</FlatButton></TableRowColumn>
@@ -186,7 +168,7 @@ export default class TableData extends Component {
           </TableBody>
 
         </Table>
-        <RaisedButton label="Dialog" onClick={()=>this.handleOpen()} />
+        <RaisedButton label="show map" onClick={()=>this.handleOpen()} />
 
         <Dialog
           title="Dialog With Actions"
