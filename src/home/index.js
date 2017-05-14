@@ -19,6 +19,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TableData from './components/table-data';
 var ReactDOM = require('react-dom');
 var NotificationSystem = require('react-notification-system');
+var Forecast = require('react-forecast');
 
 var MyComponent = React.createClass({
   _notificationSystem: null,
@@ -46,6 +47,10 @@ var MyComponent = React.createClass({
 });
 class HomePage extends React.Component {
   state = {
+    coords:{
+      lat:0,
+      long:0
+    },
     posts: {
 
     }
@@ -58,17 +63,39 @@ class HomePage extends React.Component {
       author: PropTypes.string.isRequired,
     }).isRequired).isRequired,
   };
-
+  updateCoords (coords){
+   this.setState({
+     coords:{
+       lat:coords.latitude,
+       long:coords.longitude
+     }})
+ }
   componentDidMount() {
+
+    var self= this;
     document.title = title;
     axios.get(`https://bookit-80365.firebaseio.com/posts.json`)
       .then(res => {
         console.log(res.data)
         this.setState({ posts:res.data });
       });
+    navigator.geolocation.getCurrentPosition(success, error);
+    function success(pos) {
+      var crd = pos.coords;
+      self.updateCoords(crd)
+      console.log('Your current position is:');
+      console.log('Latitude : ' + crd.latitude);
+      console.log('Longitude: ' + crd.longitude);
+      console.log('More or less ' + crd.accuracy + ' meters.');
+    };
+
+    function error(err) {
+      console.warn('ERROR(' + err.code + '): ' + err.message);
+    };
   }
 
   render() {
+    {console.log(this.state)}
     return (
       <MuiThemeProvider>
       <Layout className={s.content}>
@@ -79,7 +106,9 @@ class HomePage extends React.Component {
         {/*/>*/}
         <h4></h4>
         <Wind data={this.state.posts} />
-<TableData />
+        <TableData />
+        <Forecast latitude={this.state.coords.lat} longitude={this.state.coords.long} units={'uk'} name='Athens' />
+
         <p>
           <br /><br />
         </p>
